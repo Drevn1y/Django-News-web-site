@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>News.uz</title>
+</head>
+<body>
+<h1>Новости на сегодня!</h1>
+<hr>
+{% if user.is_authenticated %}
+<form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Выйти</button>
+</form>
+{% else %}
+<form action="register" method="post">
+    {% csrf_token %}
+    <button type="submit"><a href="/accounts/login"><a href="/sign-up">Регистрация</a></a></button>
+</form>
+<form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <button type="submit"><a href="/accounts/login">Вход</a></button>
+</form>
+{% endif %}
+
+<form action="search" method="POST">
+    {% csrf_token %}
+    <input type="text" name="search_state">
+    <button>Поиск</button>
+</form>
+<hr>
+Новости:<br>
+{% for i in states %}
+<a href="/states/{{ i.id }}">{{ i.title }}</a><br>
+{% endfor %}
+<hr>
+Категория:<br>
+{% for i in category %}
+<a href="/category/{{ i.id }}">{{ i.c_name }}</a><br>
+{% endfor %}
+<hr>
+<a href="/regist-state">Предложить новость!</a>
+</body>
+</html>

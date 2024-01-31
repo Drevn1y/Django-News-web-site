@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Новость</title>
+</head>
+<body>
+<h1>{{ states.title }}</h1>
+<hr>
+Категория: <a href="/category/{{ states.category_name.id }}">{{ states.category_name }}</a><br>
+{{ states.text }}<br><br>
+<img src="product.pr_photo" alt=""><br>
+<hr>
+<a href="/">Главная страница</a>
+<a href="/add-comment">Добавить комментария</a>
+<hr>
+Комментария: <br>
+<hr>
+{% for i in comment %}
+{{ i.user_name }}<br>
+<blockquote style="margin-left: 20px;">{{ i.user_comment }}</blockquote>
+<hr>
+{% endfor %}
+
+
+
+
+</body>
+</html>

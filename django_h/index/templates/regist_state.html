@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+</head>
+<body>
+Добавить новость
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.title }}<br>
+    {{ form.text }}<br>
+    {{ form.img }}<br>
+    {{ form.category_name }}<br>
+    <button type="submit">Опубликовать</button>
+    <span>{{ error }}</span>
+</form>
+<a href="/">Главная страница</a>
+</body>
+</html>

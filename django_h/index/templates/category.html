@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Категория</title>
+</head>
+<body>
+{% for i in states %}
+<a href="/states/{{ i.id }}">{{ i.title }}</a>
+{% endfor %}
+<hr>
+<a href="/">Главная страница</a>
+</body>
+</html>

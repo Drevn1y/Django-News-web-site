@@ -11,4 +11,8 @@ urlpatterns = [
     path('search', views.search_state),
     path('add-comment', views.add_comment),
     path('sign-up', views.register),
+    path('cabinet', views.cabinet),
+    path('about-us', views.about),
+    path('contacts', views.contacts),
+    path('news-edit/<int:news_id>/', views.news_edit),
 ]

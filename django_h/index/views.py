@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SearchForm, CommentsForm, TitleForm, SignUpForm
 from .models import Category, Title, Comments
 from django.contrib.auth import login
@@ -13,6 +13,18 @@ def home(request):
                'states': states_all,
                'category': category_all}
     return render(request, 'home.html', context)
+
+
+def cabinet(request):
+    return render(request, 'registration/cabinet.html')
+
+
+def about(request):
+    return render(request, 'about-us.html')
+
+
+def contacts(request):
+    return render(request, 'contacts.html')
 
 
 def register(request):
@@ -93,47 +105,22 @@ def add_comment(request):
                'error': error}
     return render(request, 'add_comment.html', context)
 
-# def get_user_comment(request):
-#     comment = Comments.objetcs.all()
-#     context = {'comment': comment}
-#     return render(request, 'comments.html', context)
 
+def news_edit(request, news_id):
+    error = ''
+    news_instance = Title.objects.get(id=news_id)
 
-# def dell_comment(request, pk):
-#     dell_comments = Comments.objects.get(id=pk)
-#     Comments.objects.filter(user_id=request.user.id,
-#                             user_comment=dell_comments).delete()
-#     return redirect('/')
+    if request.method == 'POST':
+        form = TitleForm(request.POST, request.FILES, instance=news_instance)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+        else:
+            print(form.errors)
+            error = 'Invalid text'
+    else:
+        form = TitleForm(instance=news_instance)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    context = {'form': form, 'error': error}
+    return render(request, 'news-edit.html', context)
 

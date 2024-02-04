@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <title>Комментария</title>
+    <title>Редактирование</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary rounded" aria-label="Eleventh navbar example">
@@ -19,16 +19,19 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/">Главная страница</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cabinet">Личный кабинет</a>
+            </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Прочее</a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="about-us">О нас</a></li>
-                <li><a class="dropdown-item" href="contacts">Контакты</a></li>
-                <li><a class="dropdown-item" href="regist-state">Предложить новость</a></li>
+                <li><a class="dropdown-item" href="/about-us">О нас</a></li>
+                <li><a class="dropdown-item" href="/contacts">Контакты</a></li>
+                <li><a class="dropdown-item" href="/regist-state">Предложить новость</a></li>
               </ul>
             </li>
           </ul>
-          <form action="search" method="POST">
+          <form action="/search" method="POST">
                 {% csrf_token %}
                 <input type="text" name="search_state">
                 <button>Поиск</button>
@@ -36,5 +39,20 @@
         </div>
       </div>
     </nav>
+Редактирование
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.title }}<br>
+    {{ form.text }}<br>
+    {{ form.img }}<br>
+    {{ form.category_name }}<br>
+    <button type="submit">Изменить</button>
+    <span>{{ error }}</span>
+</form>
+
+<div class="submit-row">
+    <a href="/admin/index/title/3/delete/" class="deletelink">Удалить</a>
+</div>
+
 </body>
 </html>
